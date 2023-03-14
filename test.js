@@ -19,8 +19,14 @@ async function fetchTrivia(numOfQs, category) {
     return response;
 }
 
-fetchTrivia(3, "pizza")
-    .then((res) => {
-        console.log(res.data.choices[0].text);
-        // console.log(JSON.parse(res.data.choices[0].text));
-    })
+fetchTrivia(3, "Jurassic Park")
+    .then(
+        (ftResponse) => {
+            const dansCoolArray = JSON.parse(ftResponse.data.choices[0].text);
+            dansCoolArray.forEach(
+                (qaPair) => {
+                    console.log(`Q: ${qaPair[0]}`);
+                }
+            )
+        }
+    )
