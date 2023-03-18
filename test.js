@@ -11,7 +11,6 @@ const openai = new OpenAIApi(configuration);
 
 async function fetchTrivia(numOfQs, category) {
     const foo = prompt(numOfQs, category);
-    // console.log(foo);
     const response = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: foo,
