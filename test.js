@@ -3,6 +3,7 @@ function prompt(numOfQs, category) {
 }
 
 const { Configuration, OpenAIApi } = require("openai");
+const { flushSync } = require("react-dom");
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
@@ -10,7 +11,7 @@ const openai = new OpenAIApi(configuration);
 
 async function fetchTrivia(numOfQs, category) {
     const foo = prompt(numOfQs, category);
-    console.log(foo);
+    // console.log(foo);
     const response = await openai.createCompletion({
         model: "text-davinci-003",
         prompt: foo,
@@ -19,14 +20,23 @@ async function fetchTrivia(numOfQs, category) {
     return response;
 }
 
-fetchTrivia(3, "Jurassic Park")
-    .then(
-        (ftResponse) => {
-            const dansCoolArray = JSON.parse(ftResponse.data.choices[0].text);
-            dansCoolArray.forEach(
-                (qaPair) => {
-                    console.log(`Q: ${qaPair[0]}`);
-                }
-            )
+fetchTrivia(3, "pizza")
+    .then((res) => {
+        const foo = JSON.parse(res.data.choices[0].text);
+        const jsonFoo = JSON.stringify(foo);
+        const folderName = "./Trivia";
+        console.log(foo);
+        let fs = require('fs');
+        try {
+            if (!fs.existsSync(folderName)) {
+                fs.mkdirSync(folderName);
+            }
+        } catch (err) {
+            console.error(err);
         }
-    )
+        fs.writeFile("./Trivia/test.json", jsonFoo, function (err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+    })
