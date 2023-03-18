@@ -34,9 +34,9 @@ fetchTrivia(3, "pizza")
         } catch (err) {
             console.error(err);
         }
-        fs.writeFile("./Trivia/test.json", jsonFoo, function (err) {
+        fs.writeFile("./Trivia/sample.json", jsonFoo, function (err) {
             if (err) {
-                console.log(err);
+                console.error(err);
             }
         });
     })
