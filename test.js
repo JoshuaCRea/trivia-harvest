@@ -15,18 +15,14 @@ const chatGptPrompt = (numOfQs, category) => {
 
 const fetchTrivia = async (numOfQs, category) => {
     const prompt = chatGptPrompt(numOfQs, category);
-    try {
-        const completion = await openai.createCompletion(
-            {
-                model: "text-davinci-003",
-                prompt: prompt,
-                max_tokens: 1000,
-            }
-        );
-        return completion;
-    } catch (err) {
-        console.error(err);
-    }
+    const completion = await openai.createCompletion(
+        {
+            model: "text-davinci-003-BOGUS",
+            prompt: prompt,
+            max_tokens: 1000,
+        }
+    );
+    return completion;
 }
 
 fetchTrivia(3, "pizza")
@@ -49,3 +45,6 @@ fetchTrivia(3, "pizza")
             }
         });
     })
+    .catch((err) => {
+        console.error(err);
+    });
