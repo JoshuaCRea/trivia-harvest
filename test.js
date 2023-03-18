@@ -8,6 +8,7 @@ const openai = new OpenAIApi(configuration);
 
 const OUTPUT_DIR = "./trivia";
 const OUTPUT_FILE = "sample.json";
+const OUTPUT_PATH = `${OUTPUT_DIR}/${OUTPUT_FILE}`;
 
 const chatGptPrompt = (numOfQs, category) => {
     return (
@@ -33,7 +34,9 @@ fetchTrivia(3, "movies")
 
         try {
             // Forcibly convert the response to the format we want written to the file
-            const foo = JSON.stringify(
+            // Note that this relies on the API response being parseable as JSON
+            // In case of frequent API errors we may need to adjust the prompt
+            const responsePreparedForFile = JSON.stringify(
                 JSON.parse(
                     res.data.choices[0].text
                 )
@@ -42,12 +45,23 @@ fetchTrivia(3, "movies")
             if (!fs.existsSync(OUTPUT_DIR)) {
                 fs.mkdirSync(OUTPUT_DIR);
             }
-            fs.writeFile(`${OUTPUT_DIR}/${OUTPUT_FILE}`, foo, (err) => {
+
+            fs.writeFile(OUTPUT_PATH, responsePreparedForFile, (err) => {
                 if (err) {
                     console.log(`\n🚨🚨🚨 Error writing file 🚨🚨🚨`);
                     console.error(err);
                 }
             });
+
+            fs.readFile(OUTPUT_PATH, (err, data) => {
+                if (err) {
+                    console.log(`\n🚨🚨🚨 Error reading file 🚨🚨🚨`);
+                    console.error(err);
+                }
+                console.log(`\n📄📄📄 File contents (${OUTPUT_PATH}) 📄📄📄`);
+                console.log(data.toString());
+            });
+
         } catch (err) {
             console.log(`\n🚨🚨🚨 Error preparing response for writing to file 🚨🚨🚨`);
             console.error(err);
