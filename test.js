@@ -35,7 +35,7 @@ fetchTrivia(3, "pizza")
         console.log(foo);
         const jsonFoo = JSON.stringify(foo);
         console.log(jsonFoo);
-        const folderName = "./Trivia";
+        const folderName = "./trivia";
         try {
             if (!fs.existsSync(folderName)) {
                 fs.mkdirSync(folderName);
