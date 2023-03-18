@@ -1,0 +1,27 @@
+{
+    "Westeros": {
+        "type": "text",
+        "questions": [
+            {
+                "prompt": "What is the name of Jon Snow's dire wolf?",
+                "answer": "Ghost"
+            },
+            {
+                "prompt": "How many fingers did Stannis Baratheon chop off of Davos's hand, as punishment for illegal smuggling?",
+                "answer": "Four. He kept his thumb."
+            },
+            {
+                "prompt": "Sandor Clegane, known as 'The Hound,' is a hard-drinking, murderous curmudgeon, but he runs away from the Battle of Blackwater due to his crippling fear of what?",
+                "answer": "Fire"
+            },
+            {
+                "prompt": "Bastards born in the north get the last name 'Snow,' in the south, 'Sand,' and in the Vale, 'Stone,' to name a few. What last name is given to bastards born in the Reach?",
+                "answer": "Flowers"
+            },
+            {
+                "prompt": "What deity does the Brotherhood Without Banners serve?",
+                "answer": "R'hollor, the Lord of Light"
+            }
+        ]
+    }
+}
