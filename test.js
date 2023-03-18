@@ -39,7 +39,9 @@ fetchTrivia(3, "movies")
             const responsePreparedForFile = JSON.stringify(
                 JSON.parse(
                     res.data.choices[0].text
-                )
+                ),
+                null,
+                4
             );
 
             if (!fs.existsSync(OUTPUT_DIR)) {
